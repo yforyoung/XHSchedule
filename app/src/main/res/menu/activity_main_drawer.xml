@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title=" ">
+        <menu>
+            <item
+                android:icon="@drawable/ic_choose_bg"
+                android:id="@+id/background_choose"
+                android:title="背景"
+                />
+            <item
+                android:icon="@drawable/ic_reload"
+                android:id="@+id/reload"
+                android:title="注销" />
+            <item
+                android:icon="@drawable/ic_exit"
+                android:id="@+id/exit"
+                android:title="退出" />
+        </menu>
+    </item>
+
+</menu>
