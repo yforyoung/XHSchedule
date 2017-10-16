@@ -9,6 +9,11 @@
                 android:title="背景"
                 />
             <item
+                android:icon="@drawable/ic_reply_black"
+                android:id="@+id/reset_bg"
+                android:title="重置背景"
+                />
+            <item
                 android:icon="@drawable/ic_reload"
                 android:id="@+id/reload"
                 android:title="注销" />

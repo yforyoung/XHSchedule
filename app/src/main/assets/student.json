@@ -96,16 +96,16 @@
       "location": "2A-309数计公共机房60座"
     },
     {
-      "name": "操作系统",
+      "name": "莫名其妙的测试课程",
       "week_index": 2,
       "course_index": [9, 10],
-      "week_start": 1,
-      "week_end": 10,
+      "week_start": 11,
+      "week_end": 14,
       "teacher": "薛开庆",
-      "location": "6C-218多媒体84座"
+      "location": "2A-309数计公共机房60座"
     },
     {
-      "name": "操作系统test",
+      "name": "操作系统",
       "week_index": 2,
       "course_index": [9, 10],
       "week_start": 1,

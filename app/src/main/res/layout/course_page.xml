@@ -49,7 +49,7 @@
     <TextView
         android:id="@+id/course_zhou"
         android:background="@drawable/course_page_di"
-        android:text="zhou"
+        android:text="单周"
         android:textSize="15sp"
         android:gravity="center"
         android:layout_width="match_parent"

@@ -8,7 +8,7 @@
 
     >
 
-    <android.support.design.widget.TextInputEditText
+    <EditText
         android:gravity="center"
         android:id="@+id/password_input"
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         android:layout_centerVertical="true"
         />
 
-    <android.support.design.widget.TextInputEditText
+    <EditText
         android:gravity="center"
         android:id="@+id/id_input"
         android:layout_width="match_parent"
@@ -28,25 +28,40 @@
         />
 
 
-<android.support.design.widget.TextInputEditText
-    android:layout_centerHorizontal="true"
-    android:hint="验证码"
-    android:id="@+id/yzm_input"
-    android:gravity="center"
-    android:layout_below="@id/password_input"
-    android:layout_width="150dp"
-    android:layout_height="50dp" />
+    <EditText
+        android:hint="验证码"
+        android:id="@+id/yzm_input"
+        android:gravity="center"
+        android:layout_below="@id/password_input"
+        android:layout_width="170dp"
+        android:layout_height="50dp" />
 
 
-    <ImageView
+    <WebView
         android:id="@+id/yzm_pic"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_alignTop="@id/yzm_input"
+        android:layout_alignBottom="@id/yzm_input"
+        android:layout_marginBottom="10dp"
         android:layout_toRightOf="@id/yzm_input"
-
         />
+    <Button
+        android:id="@+id/change_pic"
+        android:text="换一张"
+        android:textColor="#6e6e6e"
+        android:textSize="18sp"
+        android:layout_alignBottom="@id/yzm_input"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@id/yzm_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:background="@drawable/diliver"
+        />
+
+
+
     <ImageView
         android:layout_width="120dp"
         android:layout_height="120dp"
@@ -54,7 +69,6 @@
         android:layout_centerHorizontal="true"
         android:layout_above="@id/id_input"
         android:layout_marginBottom="30dp"
-
         />
 
     <Button
@@ -64,7 +78,7 @@
         android:textColor="#3f7874"
         android:background="@drawable/ic_load_button"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/yzm_pic"
+        android:layout_below="@id/yzm_input"
         android:layout_width="match_parent"
         android:layout_height="40dp" />
 

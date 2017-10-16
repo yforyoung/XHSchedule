@@ -3,6 +3,7 @@ package com.example.y.xhschedule;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.y.xhschedule.gson.Courses;
@@ -25,11 +26,13 @@ public class CoursePage extends AppCompatActivity {
         Intent intent=getIntent();
         courses= (Courses) intent.getSerializableExtra("course");
         courseName.setText(courses.getName().toString());
-        courseTime.setText("第"+(courses.getTime()[1]-1)/2+"节课");
+        courseTime.setText("第"+(1+courses.getTime()[1]-1)/2+"节课");
         courseTeacher.setText(courses.getTeacher().toString());
         courseLoc.setText(courses.getLocation().toString());
         courseWeek.setText(courses.getWeekStart()+" 到 "+courses.getWeekEnd()+"周");
-       // courseZhou.setText("单双周："+courses.getZhou()[0]);
+        if (courses.getZhou().toString().equals("")){
+            courseZhou.setVisibility(View.INVISIBLE);
+        }
 
 
     }

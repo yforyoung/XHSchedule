@@ -22,6 +22,7 @@ public class Courses implements Serializable{
 
     private String teacher;
     private String location;
+    private String zhou;
 
 
     public Courses() {
@@ -32,14 +33,12 @@ public class Courses implements Serializable{
         this.location = location;
     }
 
-    public Courses(String name, int week, int[] time, int weekStart, int weekEnd, String teacher, String location) {
-        this.name = name;
-        this.week = week;
-        this.time = time;
-        this.weekStart = weekStart;
-        this.weekEnd = weekEnd;
-        this.teacher = teacher;
-        this.location = location;
+    public String getZhou() {
+        return zhou;
+    }
+
+    public void setZhou(String zhou) {
+        this.zhou = zhou;
     }
 
     public String getName() {

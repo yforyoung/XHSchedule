@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -56,6 +57,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,7 +74,6 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = "MainActivity";
     private List<Courses> coursesList =new ArrayList<>();
     private Courses courses[][]=new Courses[5][7];
-   // private HashMap<Integer, Courses> coursesHashMap;
    private HashMap<Integer, ArrayList<Courses>> coursesHashMap;
     private Util util=new Util();
 
@@ -86,12 +87,12 @@ public class MainActivity extends AppCompatActivity
     private LinearLayout contentMain;
     private StaggeredGridLayoutManager layoutManager;
     private SharedPreferences.Editor weekEditor;
+    private TextView toolbarTitle;
+    private TextView sun,mon,tues,wed,thur,fri,satu;
 
     private int weekNow=1;
     private String stuName;
     private String stuID;
-
-
 
 
     private Handler handler=new Handler(){
@@ -108,19 +109,50 @@ public class MainActivity extends AppCompatActivity
                         public void onItemClick(View view, final int position) {
 
                             final Courses temp=coursesList.get(position);
+                            final ArrayList<Courses> list=coursesHashMap.get(position);
+
                             if (!temp.getName().equals("  ")){
                                 if(coursesHashMap.get(position)==null){
                                     Intent intent=new Intent(getApplicationContext(),CoursePage.class);
                                     intent.putExtra("course",temp);
                                     startActivity(intent);
                                 }else {
-                                    ArrayList<Courses> list=coursesHashMap.get(position);
-
+                                    final int size=list.size();
                                     String []cont=new String[list.size()+1];
-                                    cont[0]=temp.getName();
+                                    if (temp.getWeekStart()<=weekNow&&weekNow<=temp.getWeekEnd()){
+                                        String zhou="";
+                                        zhou=temp.getZhou();
+                                        if (zhou=="")
+                                            cont[0]=temp.getName()+"（今日有课）";
+                                        else if (zhou.contains("双周")&&weekNow%2==0)
+                                            cont[0]=temp.getName()+"（今日有课）";
+                                        else if (zhou.contains("单周")&&(weekNow+1)%2==0) {
+                                            cont[0]=temp.getName()+"（今日有课）";
+                                        }
+                                        else
+                                            cont[0]=temp.getName();
+                                    }else{
+                                        cont[0]=temp.getName();
+                                    }
+
                                     int i=0;
                                     for (Courses c:list){
-                                        cont[i+1]=c.getName();
+                                        if (c.getWeekStart()<=weekNow&&weekNow<=c.getWeekEnd()){
+                                            String zhou="";
+                                            zhou=c.getZhou();
+                                            if (zhou=="")
+                                                cont[++i]=c.getName()+"（今日有课）";
+                                            else if (zhou.contains("双周")&&weekNow%2==0)
+                                                cont[++i]=c.getName()+"（今日有课）";
+                                            else if (zhou.contains("单周")&&(weekNow+1)%2==0) {
+                                                cont[++i]=c.getName()+"（今日有课）";
+                                            }
+                                            else
+                                                cont[++i]=c.getName();
+                                        }else {
+                                            cont[++i]=c.getName();
+                                        }
+
                                     }
 
                                     AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
@@ -133,16 +165,16 @@ public class MainActivity extends AppCompatActivity
                                                     intent.putExtra("course",temp);
                                                     break;
                                                 case 1:
-                                                    intent.putExtra("course",coursesHashMap.get(position).get(0));
+                                                    intent.putExtra("course",list.get(0));
                                                     break;
                                                 case 2:
-                                                    intent.putExtra("course",coursesHashMap.get(position).get(1));
+                                                    intent.putExtra("course",list.get(1));
                                                     break;
                                                 case 3:
-                                                    intent.putExtra("course",coursesHashMap.get(position).get(2));
+                                                    intent.putExtra("course",list.get(2));
                                                     break;
                                                 default:
-                                                    intent.putExtra("course",coursesHashMap.get(position).get(position-1));
+                                                    intent.putExtra("course",list.get(size-1));
                                                     break;
                                             }
                                             startActivity(intent);
@@ -171,10 +203,49 @@ public class MainActivity extends AppCompatActivity
         studentID= (TextView) head.getHeaderView(0).findViewById(R.id.student_id);
         studentName= (TextView) head.getHeaderView(0).findViewById(R.id.student_name);
         contentMain= (LinearLayout) findViewById(R.id.content_main_linear);
+        toolbarTitle= (TextView) findViewById(R.id.toolbar_title);
+        sun= (TextView) findViewById(R.id.sunday);
+        mon= (TextView) findViewById(R.id.monday);
+        tues= (TextView) findViewById(R.id.tuesday);
+        wed= (TextView) findViewById(R.id.wednesday);
+        thur= (TextView) findViewById(R.id.thursday);
+        fri = (TextView) findViewById(R.id.friday);
+        satu= (TextView) findViewById(R.id.saturday);
+
+
+        Calendar calendar=Calendar.getInstance();
+        int today=calendar.get(Calendar.DAY_OF_WEEK);
+        Log.i(TAG, "onCreate: "+today);
+        switch (today){
+            case 1:
+                sun.setBackgroundColor(Color.parseColor("#9BF2AAAA"));
+                break;
+            case 2:
+                mon.setBackgroundColor(Color.parseColor("#9BF2AAAA"));
+                break;
+            case 3:
+                tues.setBackgroundColor(Color.parseColor("#9BF2AAAA"));
+                break;
+            case 4:
+                wed.setBackgroundColor(Color.parseColor("#9BF2AAAA"));
+                break;
+            case 5:
+                thur.setBackgroundColor(Color.parseColor("#9BF2AAAA"));
+                break;
+            case 6:
+                fri.setBackgroundColor(Color.parseColor("#9BF2AAAA"));
+                break;
+            case 7:
+                satu.setBackgroundColor(Color.parseColor("#9BF2AAAA"));
+                break;
+
+        }
+
 
         coursesHashMap=new HashMap<>();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -194,13 +265,10 @@ public class MainActivity extends AppCompatActivity
 
         SharedPreferences pref=getSharedPreferences("weekNow",MODE_PRIVATE);
         weekNow=pref.getInt("week_now",1);
-
-
+        toolbarTitle.setText("第"+weekNow+"周");
         recyclerView= (RecyclerView) findViewById(R.id.schedule_recycler_view);
         layoutManager=new StaggeredGridLayoutManager(7,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-
-
         adapter=new ScheduleAdapter(coursesList,weekNow);
         recyclerView.setAdapter(adapter);
 
@@ -227,14 +295,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onCreatePanelMenu(int featureId, Menu menu) {
-        getMenuInflater().inflate(R.menu.main,menu);
-        menuItem=menu.findItem(R.id.week);
-        menuItem.setTitle("第"+weekNow+"周");
-
-        return true;
-    }
   /*菜单点击事件*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -244,7 +304,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 weekNow=which+1;
-                menuItem.setTitle("第"+weekNow+"周");
+                toolbarTitle.setText("第"+weekNow+"周");
                 weekEditor.putInt("week_now",weekNow);
                 weekEditor.apply();
                 adapter.setWeek(weekNow);
@@ -263,7 +323,6 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         switch (id){
@@ -285,6 +344,10 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.exit:
                 finish();
+                break;
+            case R.id.reset_bg:
+                picSaved("");
+                displayImage("");
                 break;
             default:
         }
@@ -400,32 +463,27 @@ public class MainActivity extends AppCompatActivity
 
 
     public void initSchedule(){
-       // String temp=readJSON();
-     //   parseJSONWithGSON(temp);
-        for(int i=0;i<5;i++){
-            for (int j=0;j<7;j++)
-                courses[i][j]=null;
-        }
+        String temp=util.readJSON(getApplicationContext());
+        if (temp.contains("college")){
+            for(int i=0;i<5;i++){
+                for (int j=0;j<7;j++)
+                    courses[i][j]=null;
+            }
+            if (!coursesHashMap.isEmpty())
+                coursesHashMap.clear();
 
-        if (!coursesHashMap.isEmpty())
-            coursesHashMap.clear();
-
-        coursesList.clear();
-
-        try {
-            InputStream is=getResources().getAssets().open("student.json");
-            student=util.parseJSONWithGSON(is);
+            coursesList.clear();
+            student=util.parseJSONWithGSON(temp);
             util.loadData(student,courses,weekNow,coursesList,coursesHashMap);
             stuName=student.getSname();
             stuID=student.getSno();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            Message message=new Message();
+            message.what=1;
+            handler.sendMessage(message);
+        }else {
+            Toast.makeText(this, "信息获取失败！", Toast.LENGTH_SHORT).show();
         }
-
-        Message message=new Message();
-        message.what=1;
-        handler.sendMessage(message);
-
     }
 
 }

@@ -1,0 +1,335 @@
+{
+  "college": "人文学院",
+  "sno": "3120151704210",
+  "profession": "汉语言文学",
+  "class": "汉语言15-2",
+  "sname": "朱文杰",
+  "sex": "男",
+  "courses": [
+    {
+      "week_start": 9,
+      "week_end": 15,
+      "name": "外国文学(1)",
+      "week_index": 1,
+      "course_index": [
+        1,
+        2
+      ],
+      "teacher": "李昌云",
+      "location": "6C-226多媒体95座",
+      "zhou": "单周"
+    },
+    {
+      "week_start": 1,
+      "week_end": 5,
+      "name": "外国文学(1)",
+      "week_index": 1,
+      "course_index": [
+        1,
+        2
+      ],
+      "teacher": "李昌云",
+      "location": "6C-226多媒体95座",
+      "zhou": "单周"
+    },
+    {
+      "week_start": 1,
+      "week_end": 14,
+      "name": "毛泽东思想与中国特色社会主义理论体系概论",
+      "week_index": 2,
+      "course_index": [
+        1,
+        2
+      ],
+      "teacher": "刘华桂",
+      "location": "4A-202多媒体160座",
+      "zhou": ""
+    },
+    {
+      "week_start": 8,
+      "week_end": 16,
+      "name": "外国文学(1)",
+      "week_index": 3,
+      "course_index": [
+        1,
+        2
+      ],
+      "teacher": "李昌云",
+      "location": "6C-221多媒体95座",
+      "zhou": ""
+    },
+    {
+      "week_start": 1,
+      "week_end": 5,
+      "name": "外国文学(1)",
+      "week_index": 3,
+      "course_index": [
+        1,
+        2
+      ],
+      "teacher": "李昌云",
+      "location": "6C-221多媒体95座",
+      "zhou": ""
+    },
+    {
+      "week_start": 1,
+      "week_end": 16,
+      "name": "美学",
+      "week_index": 4,
+      "course_index": [
+        1,
+        2
+      ],
+      "teacher": "范国英",
+      "location": "6B-203多媒体160座精品课教室",
+      "zhou": ""
+    },
+    {
+      "week_start": 1,
+      "week_end": 16,
+      "name": "中学语文教学法",
+      "week_index": 1,
+      "course_index": [
+        3,
+        4
+      ],
+      "teacher": "王万洪",
+      "location": "6C-229多媒体84座",
+      "zhou": ""
+    },
+    {
+      "week_start": 1,
+      "week_end": 8,
+      "name": "文学概论(2)",
+      "week_index": 2,
+      "course_index": [
+        3,
+        4
+      ],
+      "teacher": "王庆",
+      "location": "5C-104多媒体286座",
+      "zhou": ""
+    },
+    {
+      "week_start": 1,
+      "week_end": 15,
+      "name": "中学语文教学法",
+      "week_index": 3,
+      "course_index": [
+        3,
+        4
+      ],
+      "teacher": "王万洪",
+      "location": "6C-513多媒体95座",
+      "zhou": "单周"
+    },
+    {
+      "week_start": 2,
+      "week_end": 16,
+      "name": "教育学A",
+      "week_index": 3,
+      "course_index": [
+        3,
+        4
+      ],
+      "teacher": "唐正军",
+      "location": "6C-513多媒体95座",
+      "zhou": "双周"
+    },
+    {
+      "week_start": 1,
+      "week_end": 14,
+      "name": "毛泽东思想与中国特色社会主义理论体系概论",
+      "week_index": 4,
+      "course_index": [
+        3,
+        4
+      ],
+      "teacher": "刘华桂",
+      "location": "4A-102多媒体160座",
+      "zhou": ""
+    },
+    {
+      "week_start": 9,
+      "week_end": 16,
+      "name": "跨境电商操作实务",
+      "week_index": 1,
+      "course_index": [
+        5,
+        6
+      ],
+      "teacher": "李国宏",
+      "location": "5B-202多媒体教室64座",
+      "zhou": ""
+    },
+    {
+      "week_start": 1,
+      "week_end": 8,
+      "name": "方言与地方文化",
+      "week_index": 1,
+      "course_index": [
+        5,
+        6
+      ],
+      "teacher": "王庆",
+      "location": "4B-403多媒体教室112座",
+      "zhou": ""
+    },
+    {
+      "week_start": 1,
+      "week_end": 15,
+      "name": "美学",
+      "week_index": 2,
+      "course_index": [
+        5,
+        6
+      ],
+      "teacher": "范国英",
+      "location": "6B-203多媒体160座精品课教室",
+      "zhou": "单周"
+    },
+    {
+      "week_start": 8,
+      "week_end": 8,
+      "name": "巴蜀文化名人研究",
+      "week_index": 2,
+      "course_index": [
+        5,
+        6
+      ],
+      "teacher": "谢应光",
+      "location": "6B-203多媒体160座精品课教室",
+      "zhou": ""
+    },
+    {
+      "week_start": 1,
+      "week_end": 4,
+      "name": "形势与政策3(上)",
+      "week_index": 4,
+      "course_index": [
+        5,
+        6
+      ],
+      "teacher": "陈�`",
+      "location": "4A-104多媒体294座",
+      "zhou": ""
+    },
+    {
+      "week_start": 9,
+      "week_end": 16,
+      "name": "网球",
+      "week_index": 5,
+      "course_index": [
+        5,
+        6
+      ],
+      "teacher": "刘翊军",
+      "location": "网球场-04",
+      "zhou": ""
+    },
+    {
+      "week_start": 1,
+      "week_end": 8,
+      "name": "瑜伽",
+      "week_index": 1,
+      "course_index": [
+        7,
+        8
+      ],
+      "teacher": "周红梅",
+      "location": "体育馆南阳台",
+      "zhou": ""
+    },
+    {
+      "week_start": 1,
+      "week_end": 1,
+      "name": "巴蜀文化名人研究",
+      "week_index": 2,
+      "course_index": [
+        7,
+        8
+      ],
+      "teacher": "谢应光",
+      "location": "6B-203多媒体160座精品课教室",
+      "zhou": ""
+    },
+    {
+      "week_start": 4,
+      "week_end": 8,
+      "name": "巴蜀文化名人研究",
+      "week_index": 2,
+      "course_index": [
+        7,
+        8
+      ],
+      "teacher": "谢应光",
+      "location": "6B-203多媒体160座精品课教室",
+      "zhou": ""
+    },
+    {
+      "week_start": 1,
+      "week_end": 2,
+      "name": "中国现代诗歌研究",
+      "week_index": 3,
+      "course_index": [
+        7,
+        8
+      ],
+      "teacher": "谢应光",
+      "location": "6C-203多媒体84座精品课教室",
+      "zhou": ""
+    },
+    {
+      "week_start": 4,
+      "week_end": 16,
+      "name": "中国现代诗歌研究",
+      "week_index": 3,
+      "course_index": [
+        7,
+        8
+      ],
+      "teacher": "谢应光",
+      "location": "6C-203多媒体84座精品课教室",
+      "zhou": ""
+    },
+    {
+      "week_start": 1,
+      "week_end": 16,
+      "name": "教育学A",
+      "week_index": 5,
+      "course_index": [
+        7,
+        8
+      ],
+      "teacher": "唐正军",
+      "location": "6C-213多媒体84座",
+      "zhou": ""
+    },
+    {
+      "week_start": 1,
+      "week_end": 8,
+      "name": "文学概论(2)",
+      "week_index": 1,
+      "course_index": [
+        9,
+        10
+      ],
+      "teacher": "王庆",
+      "location": "5C-105多媒体153座",
+      "zhou": ""
+    },
+    {
+      "week_start": 1,
+      "week_end": 16,
+      "name": "中国古代诗歌研究",
+      "week_index": 2,
+      "course_index": [
+        9,
+        10
+      ],
+      "teacher": "喻芳",
+      "location": "3B-203多媒体教室122座",
+      "zhou": ""
+    }
+  ]
+}

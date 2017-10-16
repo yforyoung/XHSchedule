@@ -2,6 +2,7 @@ package com.example.y.xhschedule;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,10 +77,20 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         holder.itemView.setTag(position);
 
         if (courses.getWeekStart()<=week&&week<=courses.getWeekEnd()){
-            holder.itemView.setBackgroundResource(R.drawable.bg_course);
+            String zhou="";
+            zhou=courses.getZhou();
+            if (zhou=="")
+                holder.itemView.setBackgroundResource(R.drawable.bg_course);
+            else if (zhou.contains("双周")&&week%2==0)
+                holder.itemView.setBackgroundResource(R.drawable.bg_course);
+            else if (zhou.contains("单周")&&(week+1)%2==0) {
+                holder.itemView.setBackgroundResource(R.drawable.bg_course);
+            }
+            else
+                holder.itemView.setBackgroundResource(R.drawable.bg_course_single);
         }else
         {
-            holder.itemView.setBackgroundResource(R.drawable.diliver);
+            holder.itemView.setBackgroundColor(Color.parseColor("#00000000"));
         }
     }
 
