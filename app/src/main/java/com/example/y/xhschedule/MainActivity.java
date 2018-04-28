@@ -1,10 +1,9 @@
 package com.example.y.xhschedule;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.Dialog;
 import android.content.ContentUris;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,7 +32,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -45,63 +43,37 @@ import android.widget.Toast;
 import com.example.y.xhschedule.Util.Util;
 import com.example.y.xhschedule.gson.Courses;
 import com.example.y.xhschedule.gson.Student;
-import com.google.gson.Gson;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAG = "MainActivity";
     private List<Courses> coursesList =new ArrayList<>();
     private Courses courses[][]=new Courses[5][7];
    private HashMap<Integer, ArrayList<Courses>> coursesHashMap;
     private Util util=new Util();
-
-    private MenuItem menuItem;
-
     private TextView studentName;
     private TextView studentID;
-    private Student student;
     private ScheduleAdapter adapter;
-    private RecyclerView recyclerView;
     private LinearLayout contentMain;
-    private StaggeredGridLayoutManager layoutManager;
     private SharedPreferences.Editor weekEditor;
     private TextView toolbarTitle;
-    private TextView sun,mon,tues,wed,thur,fri,satu;
 
     private int weekNow=1;
     private String stuName;
     private String stuID;
 
 
+    @SuppressLint("HandlerLeak")
     private Handler handler=new Handler(){
         public void handleMessage(Message msg){
             switch (msg.what){
                 case 1:
                     studentName.setText(stuName);
                     studentID.setText(stuID);
-                    Log.i(TAG, "handleMessage: ");
                     adapter.notifyDataSetChanged();
 
                     adapter.setmOnItemClickListener(new ScheduleAdapter.OnItemClickListener() {
@@ -120,9 +92,9 @@ public class MainActivity extends AppCompatActivity
                                     final int size=list.size();
                                     String []cont=new String[list.size()+1];
                                     if (temp.getWeekStart()<=weekNow&&weekNow<=temp.getWeekEnd()){
-                                        String zhou="";
+                                        String zhou;
                                         zhou=temp.getZhou();
-                                        if (zhou=="")
+                                        if (zhou.equals(""))
                                             cont[0]=temp.getName()+"（今日有课）";
                                         else if (zhou.contains("双周")&&weekNow%2==0)
                                             cont[0]=temp.getName()+"（今日有课）";
@@ -138,9 +110,9 @@ public class MainActivity extends AppCompatActivity
                                     int i=0;
                                     for (Courses c:list){
                                         if (c.getWeekStart()<=weekNow&&weekNow<=c.getWeekEnd()){
-                                            String zhou="";
+                                            String zhou;
                                             zhou=c.getZhou();
-                                            if (zhou=="")
+                                            if (zhou.equals(""))
                                                 cont[++i]=c.getName()+"（今日有课）";
                                             else if (zhou.contains("双周")&&weekNow%2==0)
                                                 cont[++i]=c.getName()+"（今日有课）";
@@ -194,28 +166,28 @@ public class MainActivity extends AppCompatActivity
 
 
 
+    @SuppressLint({"UseSparseArrays", "CommitPrefEdits", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NavigationView head= (NavigationView) findViewById(R.id.nav_view);
-        studentID= (TextView) head.getHeaderView(0).findViewById(R.id.student_id);
-        studentName= (TextView) head.getHeaderView(0).findViewById(R.id.student_name);
-        contentMain= (LinearLayout) findViewById(R.id.content_main_linear);
-        toolbarTitle= (TextView) findViewById(R.id.toolbar_title);
-        sun= (TextView) findViewById(R.id.sunday);
-        mon= (TextView) findViewById(R.id.monday);
-        tues= (TextView) findViewById(R.id.tuesday);
-        wed= (TextView) findViewById(R.id.wednesday);
-        thur= (TextView) findViewById(R.id.thursday);
-        fri = (TextView) findViewById(R.id.friday);
-        satu= (TextView) findViewById(R.id.saturday);
+        @SuppressLint("CutPasteId") NavigationView head= findViewById(R.id.nav_view);
+        studentID= head.getHeaderView(0).findViewById(R.id.student_id);
+        studentName= head.getHeaderView(0).findViewById(R.id.student_name);
+        contentMain= findViewById(R.id.content_main_linear);
+        toolbarTitle= findViewById(R.id.toolbar_title);
+        TextView sun = findViewById(R.id.sunday);
+        TextView mon = findViewById(R.id.monday);
+        TextView tues = findViewById(R.id.tuesday);
+        TextView wed = findViewById(R.id.wednesday);
+        TextView thur = findViewById(R.id.thursday);
+        TextView fri = findViewById(R.id.friday);
+        TextView satu = findViewById(R.id.saturday);
 
 
         Calendar calendar=Calendar.getInstance();
         int today=calendar.get(Calendar.DAY_OF_WEEK);
-        Log.i(TAG, "onCreate: "+today);
         switch (today){
             case 1:
                 sun.setBackgroundColor(Color.parseColor("#9BF2AAAA"));
@@ -244,17 +216,17 @@ public class MainActivity extends AppCompatActivity
 
         coursesHashMap=new HashMap<>();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        @SuppressLint("CutPasteId") NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         weekEditor=getSharedPreferences("weekNow",MODE_PRIVATE).edit();
 
@@ -266,8 +238,8 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences pref=getSharedPreferences("weekNow",MODE_PRIVATE);
         weekNow=pref.getInt("week_now",1);
         toolbarTitle.setText("第"+weekNow+"周");
-        recyclerView= (RecyclerView) findViewById(R.id.schedule_recycler_view);
-        layoutManager=new StaggeredGridLayoutManager(7,StaggeredGridLayoutManager.VERTICAL);
+        RecyclerView recyclerView = findViewById(R.id.schedule_recycler_view);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         adapter=new ScheduleAdapter(coursesList,weekNow);
         recyclerView.setAdapter(adapter);
@@ -280,7 +252,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -301,6 +273,7 @@ public class MainActivity extends AppCompatActivity
         AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
         final String []weekC={"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
         builder.setItems(weekC, new DialogInterface.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 weekNow=which+1;
@@ -322,7 +295,7 @@ public class MainActivity extends AppCompatActivity
     /*侧边栏点击事件*/
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         switch (id){
@@ -351,7 +324,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             default:
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -414,6 +387,7 @@ public class MainActivity extends AppCompatActivity
         Uri uri=data.getData();
         if (DocumentsContract.isDocumentUri(this,uri)){
             String docId=DocumentsContract.getDocumentId(uri);
+            assert uri != null;
             if ("com.android.providers.media.documents".equals(uri.getAuthority())){
                 String id=docId.split(":")[1];
                 String selection=MediaStore.Images.Media._ID+"="+id;
@@ -422,16 +396,18 @@ public class MainActivity extends AppCompatActivity
                 Uri contentUri= ContentUris.withAppendedId(Uri.parse("content://downloads//public_downloads"),Long.valueOf(docId));
                 imagePath=getImagePath(contentUri,null);
             }
-        }else if("content".equalsIgnoreCase(uri.getScheme())){
-            imagePath=getImagePath(uri,null);
-        }else if ("file".equalsIgnoreCase(uri.getScheme())){
-            imagePath=uri.getPath();
+        }else {
+            assert uri != null;
+            if("content".equalsIgnoreCase(uri.getScheme())){
+                imagePath=getImagePath(uri,null);
+            }else if ("file".equalsIgnoreCase(uri.getScheme())){
+                imagePath=uri.getPath();
+            }
         }
         if(picSaved(imagePath)){
             displayImage(readPicPath());
         }
 
-        Log.i(TAG, "handleImageOnKitKat: "+imagePath);
     }
 
     private String getImagePath(Uri uri, String selection) {
@@ -473,10 +449,10 @@ public class MainActivity extends AppCompatActivity
                 coursesHashMap.clear();
 
             coursesList.clear();
-            student=util.parseJSONWithGSON(temp);
+            Student student = util.parseJSONWithGSON(temp);
             util.loadData(student,courses,weekNow,coursesList,coursesHashMap);
-            stuName=student.getSname();
-            stuID=student.getSno();
+            stuName= student.getSname();
+            stuID= student.getSno();
 
             Message message=new Message();
             message.what=1;

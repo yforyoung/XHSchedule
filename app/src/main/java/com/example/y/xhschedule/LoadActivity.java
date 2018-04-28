@@ -1,5 +1,6 @@
 package com.example.y.xhschedule;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -28,14 +29,12 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class LoadActivity extends AppCompatActivity {
-    private final String TAG="info";
+    private final static String TAG="info";
 
     private TextView userId;
-    private TextView changePic;
     private TextView password;
     private TextView yzm;
     private WebView yzmPic;
-    private Button login;
 
     private String sID="";
     private String sPasswd="";
@@ -45,10 +44,10 @@ public class LoadActivity extends AppCompatActivity {
 
 
     private SharedPreferences.Editor editor;
-    private SharedPreferences pref;
 
     private Util util=new Util();
 
+    @SuppressLint("HandlerLeak")
     private Handler handler=new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -83,17 +82,18 @@ public class LoadActivity extends AppCompatActivity {
 
 
 
+    @SuppressLint({"SetJavaScriptEnabled", "CommitPrefEdits"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.load_page);
 
-        userId= (TextView) findViewById(R.id.id_input);
-        password= (TextView) findViewById(R.id.password_input);
-        login= (Button) findViewById(R.id.load_button);
-        yzm= (TextView) findViewById(R.id.yzm_input);
-        yzmPic= (WebView) findViewById(R.id.yzm_pic);
-        changePic= (TextView) findViewById(R.id.change_pic);
+        userId= findViewById(R.id.id_input);
+        password= findViewById(R.id.password_input);
+        Button login = findViewById(R.id.load_button);
+        yzm= findViewById(R.id.yzm_input);
+        yzmPic= findViewById(R.id.yzm_pic);
+        TextView changePic = findViewById(R.id.change_pic);
 
         CookieSyncManager.createInstance(this);
         yzmPic.setWebViewClient(new MyWebViewClient());
@@ -101,15 +101,15 @@ public class LoadActivity extends AppCompatActivity {
         yzmPic.setWebViewClient(new MyWebViewClient());
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.setAcceptCookie(true);
-        yzmPic.loadUrl("http://course.xhban.com:8000/login");
+        yzmPic.loadUrl("http://www.aaron.mobi:8888/login");
 
         editor=getSharedPreferences("login",MODE_PRIVATE).edit();
-        pref=getSharedPreferences("login",MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences("login", MODE_PRIVATE);
 
         changePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                yzmPic.loadUrl("http://course.xhban.com:8000/login");
+                yzmPic.loadUrl("http://www.aaron.mobi:8888/login");
             }
         });
 
@@ -129,6 +129,13 @@ public class LoadActivity extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Toast.makeText(this, "取消登陆", Toast.LENGTH_SHORT).show();
+    }
+
     public void login(){
         sID=userId.getText().toString();
         sPasswd=password.getText().toString();
@@ -147,7 +154,7 @@ public class LoadActivity extends AppCompatActivity {
                         .add("checkcode",sYzm)
                         .build();
                 Request request=new Request.Builder()
-                        .url("http://course.xhban.com:8000/courses")
+                        .url("http://www.aaron.mobi:8888/courses")
                         .addHeader("cookie",c)
                         .post(requestBody)
                         .build();
@@ -159,14 +166,12 @@ public class LoadActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         String data=response.body().string();
-                        Log.i("info", "onResponse: "+data);
                         if (data.length()<=6){
                             Message msg=new Message();
                             msg.what=Integer.parseInt(data);
                             handler.sendMessage(msg);
 
                         }else {
-                            Log.i("info", "onResponse: load");
                             util.save(data,getApplicationContext());
                             editor.putString("user_id",sID);
                             editor.putString("password",sPasswd);
@@ -175,10 +180,6 @@ public class LoadActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         }
-                        /*Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                        startActivity(intent);
-                        finish();*/
-
                     }
                 });
             }
@@ -201,15 +202,12 @@ public class LoadActivity extends AppCompatActivity {
 
     public void saveCookieShared(String cookie){
         SharedPreferences.Editor spf=getSharedPreferences("cookie_save",Context.MODE_PRIVATE).edit();
-        Log.i("info", "saveCookieShared: "+cookie);
         spf.putString("cookie",cookie);
         spf.apply();
     }
 
     public String getCookieShared(){
         SharedPreferences spf=getSharedPreferences("cookie_save",Context.MODE_PRIVATE);
-        String c=spf.getString("cookie","");
-        Log.i("info", "getCookieShared: "+c);
-        return c;
+        return spf.getString("cookie","");
     }
 }

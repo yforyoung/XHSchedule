@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">XHSchedule</string>
+    <string name="app_name">西西课表</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

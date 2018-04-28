@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/content_main_linear"
-    android:background="@drawable/schebg"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.y.xhschedule.MainActivity"
     tools:showIn="@layout/app_bar_main">

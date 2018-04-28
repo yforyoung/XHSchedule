@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4ce6d8d8"
+    android:padding="@dimen/widget_margin">
+
+    <TextView
+        android:id="@+id/widget_text"
+        android:text="今日课程"
+        android:gravity="center"
+        android:background="@color/colorAccent"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ListView
+        android:id="@+id/widget_list"
+        android:layout_below="@+id/widget_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+</RelativeLayout>
