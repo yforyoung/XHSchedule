@@ -1,11 +1,11 @@
-package com.example.y.xhschedule.gson;
+package com.example.y.xhschedule.beans;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 
-public class Courses implements Serializable{
+public class Course implements Serializable{
     private String name;
 
     @SerializedName("week_index")
@@ -25,12 +25,13 @@ public class Courses implements Serializable{
     private String zhou;
 
 
-    public Courses() {
+    public Course() {
     }
 
-    public Courses(String name, String location) {
+    public Course(String name, String location,int weekEnd) {
         this.name = name;
         this.location = location;
+        this.weekEnd=weekEnd;
     }
 
     public String getZhou() {

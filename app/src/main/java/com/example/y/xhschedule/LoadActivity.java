@@ -42,7 +42,6 @@ public class LoadActivity extends AppCompatActivity {
     private String c;
     private ProgressDialog progressDialog;
 
-
     private SharedPreferences.Editor editor;
 
     private Util util=new Util();
@@ -117,8 +116,6 @@ public class LoadActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 login();
-
-
             }
         });
 

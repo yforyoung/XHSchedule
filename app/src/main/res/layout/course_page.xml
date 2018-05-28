@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@drawable/back"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <include layout="@layout/toolbar" />
     <TextView
         android:id="@+id/course_name"
         android:background="@drawable/course_page_di"
@@ -11,7 +11,7 @@
         android:textSize="15sp"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp" />
     <TextView
         android:id="@+id/course_week"
         android:background="@drawable/course_page_di"
@@ -19,7 +19,7 @@
         android:textSize="15sp"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp" />
     <TextView
         android:id="@+id/course_loc"
         android:background="@drawable/course_page_di"
@@ -27,7 +27,7 @@
         android:textSize="15sp"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp" />
     <TextView
         android:id="@+id/course_time"
         android:background="@drawable/course_page_di"
@@ -35,7 +35,7 @@
         android:textSize="15sp"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         />
     <TextView
         android:id="@+id/course_teacher"
@@ -44,7 +44,7 @@
         android:textSize="15sp"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp" />
 
     <TextView
         android:id="@+id/course_zhou"
@@ -53,7 +53,7 @@
         android:textSize="15sp"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp" />
 
 
 

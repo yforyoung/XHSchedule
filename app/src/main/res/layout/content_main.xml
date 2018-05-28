@@ -1,103 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_main_linear"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/content_main_linear"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.y.xhschedule.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:context="com.example.y.xhschedule.MainActivity">
 
-    <LinearLayout
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar_layout"/>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_nav_view"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:divider="@drawable/diliver"
-        android:showDividers="end"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/monday"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="一"
-            android:gravity="center"
-            android:textColor="#767676"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/tuesday"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-
-            android:text="二"
-            android:textColor="#767676"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/wednesday"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-
-            android:layout_weight="1"
-            android:text="三"
-            android:textColor="#767676"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/thursday"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-
-            android:layout_weight="1"
-            android:text="四"
-            android:textColor="#767676"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/friday"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-
-            android:text="五"
-            android:textColor="#767676"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/saturday"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="六"
-            android:gravity="center"
-
-            android:textColor="#767676"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/sunday"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="七"
-            android:textColor="#767676"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/schedule_recycler_view"
-        android:alpha="30"
+    </android.support.design.widget.BottomNavigationView>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_below="@id/toolbar_layout"
+        android:layout_above="@id/bottom_nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-    </android.support.v7.widget.RecyclerView>
-</LinearLayout>
+    </android.support.v4.view.ViewPager>
+</RelativeLayout>

@@ -17,11 +17,6 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <service
-            android:name=".ScheduleService"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity
             android:name=".LoadActivity"
             android:label="西西课表"
@@ -36,15 +31,6 @@
             android:name=".CoursePage"
             android:label="课表信息"></activity>
 
-        <receiver android:name=".NewAppWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/new_app_widget_info" />
-        </receiver>
     </application>
 
 </manifest>

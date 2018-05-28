@@ -1,18 +1,21 @@
-package com.example.y.xhschedule;
+package com.example.y.xhschedule.adapter;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.example.y.xhschedule.gson.Courses;
+
+import com.example.y.xhschedule.R;
+import com.example.y.xhschedule.beans.Course;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> implements View.OnClickListener {
-    private List<Courses> coursesList;
+    private List<Course> courseList;
     private int week;
 
     private List<String> name = new ArrayList<>();
@@ -36,10 +39,12 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     }
 
 
-    ScheduleAdapter(List<Courses> list, int week) {
-        coursesList = list;
+    public ScheduleAdapter(List<Course> list, int week) {
+        courseList = list;
         this.week = week;
     }
+
+
 
     public void setWeek(int number) {
         this.week = number;
@@ -68,31 +73,28 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Courses courses = coursesList.get(position);
-        holder.sName.setText(courses.getName());
-        holder.sLocation.setText(courses.getLocation());
+        Course course = courseList.get(position);
+
+        holder.sName.setText(course.getName());
+        holder.sLocation.setText(course.getLocation());
         holder.itemView.setTag(position);
 
-        if (courses.getWeekStart() <= week && week <= courses.getWeekEnd()) {
-            String zhou;
-            zhou = courses.getZhou();
-            if (!name.contains(courses.getName())) {
-                name.add(courses.getName());
+        if (course.getWeekStart() <= week && week <= course.getWeekEnd()) {
+            String zhou = course.getZhou();
+            if (!name.contains(course.getName())) {
+                name.add(course.getName());
             }
             if (zhou.equals(""))
-                randomBackground(holder.itemView,name.indexOf(courses.getName())%4);
+                randomBackground(holder.itemView,name.indexOf(course.getName())%4);
             else if (zhou.contains("双周") && week % 2 == 0)
-                randomBackground(holder.itemView,name.indexOf(courses.getName())%4);
-            else if (zhou.contains("单周") && (week + 1) % 2 == 0) {
-                randomBackground(holder.itemView,name.indexOf(courses.getName())%4);
-            } else
+                randomBackground(holder.itemView,name.indexOf(course.getName())%4);
+            else if (zhou.contains("单周") && (week + 1) % 2 == 0)
+                randomBackground(holder.itemView,name.indexOf(course.getName())%4);
+            else
                 holder.itemView.setBackgroundResource(R.drawable.bg_course_single);
-
-
         } else {
             holder.itemView.setBackgroundColor(Color.parseColor("#00000000"));
         }
-
     }
 
     private void randomBackground(View view,int i) {
@@ -115,6 +117,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return coursesList.size();
+        return courseList.size();
     }
 }

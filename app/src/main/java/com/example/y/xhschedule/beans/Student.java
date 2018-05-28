@@ -1,4 +1,4 @@
-package com.example.y.xhschedule.gson;
+package com.example.y.xhschedule.beans;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -17,7 +17,7 @@ public class Student {
     @SerializedName("class")
     private String sClass;
 
-    private List<Courses> courses;
+    private List<Course> courses;
 
 
     public String getSno()
@@ -61,11 +61,11 @@ public class Student {
         this.sClass = sClass;
     }
 
-    public List<Courses> getCourses() {
+    public List<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(List<Courses> courses) {
+    public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
 }
