@@ -31,6 +31,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.DatePicker;
@@ -75,11 +76,19 @@ public class MainActivity extends AppCompatActivity
 
         Util util = new Util();
         String temp = util.readJSON(this);
-        Student student = util.parseJSONWithGSON(temp);
-        Test.getInstance().student = student;
+        Log.i("info", "onCreate: "+temp);
+        if (temp.contains("500")){
+            Toast.makeText(this,"教务系统错误",Toast.LENGTH_SHORT).show();
+            Test.getInstance().student = new Student();
+            Test.getInstance().isFail=1;
+        }else{
+            Student student = util.parseJSONWithGSON(temp);
+            Test.getInstance().student = student;
 
-        studentName.setText(student.getSname());
-        studentID.setText(student.getSno());
+            studentName.setText(student.getSname());
+            studentID.setText(student.getSno());
+        }
+
 
 
     }

@@ -119,7 +119,8 @@ public class WeekCourseFragment extends Fragment {
                 break;
 
         }
-        initSchedule();
+        if (Test.getInstance().isFail == 0)
+            initSchedule();
     }
 
     private void showCourse(int position) {

@@ -7,6 +7,7 @@ public class Test {
     public int weekNow;
     public int login;
     public Student student;
+    public int isFail=0;
 
 
     public static Test getInstance(){

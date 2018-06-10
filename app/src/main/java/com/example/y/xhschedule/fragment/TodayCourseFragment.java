@@ -81,6 +81,7 @@ public class TodayCourseFragment extends Fragment {
         courseList = new ArrayList<>();
         adapter = new TodayCourseAdapter(courseList);
         recyclerView.setAdapter(adapter);
-        changeData();
+        if (Test.getInstance().isFail == 0)
+            changeData();
     }
 }
